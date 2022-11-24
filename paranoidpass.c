@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include<unistd.h>
 
 int main(int argc, char *argv[]){
+    srand(time(NULL));
     if(argc == 1){
         printf("Please enter password length!");
         return 0;
@@ -10,13 +12,11 @@ int main(int argc, char *argv[]){
         printf("Too many arguments!");
         return 0;
     }
-    char characters[54] = "ABCDEFGHJIKLMNOPQWRSabcdefghijklmnopqrstuv123498765#!";
+    char characters[52] = "ABCDEFGHJIKLMNOPQWRSabcdefghijklmnopqrstuv123498765";
     int passLenght = atoi(argv[1]);
     char generatedPass[passLenght];
     for(int i = 0; i < passLenght; i++){
-        srand(time(NULL));
-        int r = rand();   
-        while((r = rand()) >= 54);
+        int r = rand() % 40;
         generatedPass[i] = characters[r];
     }
     printf("Generated password: %s\n", generatedPass);
